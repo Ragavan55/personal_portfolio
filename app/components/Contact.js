@@ -6,6 +6,7 @@ import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaLinkedin, FaGithub, FaPaperPlane } from 'react-icons/fa'
 import { SiLeetcode, SiHackerrank } from 'react-icons/si'
+import Image from 'next/image'
 
 export default function Contact() {
   const [ref, inView] = useInView({
@@ -201,7 +202,7 @@ export default function Contact() {
               <div className="space-y-4">
                 {submitted ? (
                   <div className="flex flex-col items-center justify-center py-8 md:py-12">
-                    <img src="/asserts/success.png" alt="Submitted" className="w-32 h-32 mb-4" />
+                    <img src="https://cdn-icons-png.flaticon.com/512/5610/5610944.png" alt="Submitted" width={128} height={128} className="w-32 h-32 mb-4" />
                     <p className="text-green-600 dark:text-green-400 font-semibold text-lg">Thank you! Your message has been sent.</p>
                   </div>
                 ) : (
