@@ -35,11 +35,31 @@ export default function HeroLikeDesign() {
             <h3 className={`text-base sm:text-lg font-bold leading-tight ${isDark ? "text-white" : "text-gray-900"}`}>
               Full Stack Developer<br /> & UI/UX Enthusiast<br /> based in Tamil Nadu
             </h3>
+            {/* Resume Buttons */}
+            <div className="flex flex-row gap-3 mt-4 w-full justify-center md:justify-start">
+              <a
+                href="/asserts/resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg font-semibold text-xs sm:text-sm hover:shadow-xl transition-all text-center border-2 border-blue-400 dark:border-blue-600"
+                style={{ minWidth: 120 }}
+              >
+                View Resume
+              </a>
+              <a
+                href="/asserts/resume.pdf"
+                download
+                className="px-4 py-2 bg-gradient-to-r from-green-500 to-blue-600 text-white rounded-lg font-semibold text-xs sm:text-sm hover:shadow-xl transition-all text-center border-2 border-green-400 dark:border-green-600"
+                style={{ minWidth: 120 }}
+              >
+                Download Resume
+              </a>
+            </div>
           </div>
 
           {/* CENTER IMAGE */}
           <div className="md:col-span-6 relative flex flex-col justify-center items-center">
-            <div className="relative w-full h-[320px] sm:h-[400px] md:w-[480px] md:h-[700px] lg:w-[600px] lg:h-[700px] flex items-center justify-center">
+            <div className="relative w-full h-[400px] md:w-[480px] md:h-[700px] lg:w-[600px] lg:h-[700px] flex items-center justify-center">
               <Image
                 src="/asserts/Hero.png"
                 alt="Hero"

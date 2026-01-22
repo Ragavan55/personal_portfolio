@@ -1,12 +1,9 @@
 'use client'
 
-
-import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaLinkedin, FaGithub, FaPaperPlane } from 'react-icons/fa'
 import { SiLeetcode, SiHackerrank } from 'react-icons/si'
-import Image from 'next/image'
 
 export default function Contact() {
   const [ref, inView] = useInView({
@@ -85,41 +82,6 @@ export default function Contact() {
     },
   }
 
-  // Form state
-  const [form, setForm] = useState({ name: '', contact: '', description: '' })
-  const [submitted, setSubmitted] = useState(false)
-  const [error, setError] = useState('')
-
-  // Handle form input
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value })
-  }
-
-  // Handle form submit
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    setError('')
-    if (!form.name || !form.contact || !form.description) {
-      setError('Please fill all fields.')
-      return
-    }
-    try {
-      // Save to /public/asserts/contact-messages.json (append mode)
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
-      })
-      if (res.ok) {
-        setSubmitted(true)
-      } else {
-        setError('Failed to send. Try again later.')
-      }
-    } catch {
-      setError('Failed to send. Try again later.')
-    }
-  }
-
   return (
     <section id="contact" className="py-20 px-4 relative">
       <div className="max-w-screen mx-auto">
@@ -176,7 +138,7 @@ export default function Contact() {
                 {/* Social Links */}
                 <div className="mt-7 pt-7 border-t border-gray-200 dark:border-gray-700">
                   <h4 className="text-[1rem] md:text-[1.1rem] font-semibold text-gray-900 dark:text-white mb-3">Connect With Me</h4>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+                  <div className="flex flex-wrap gap-3 md:gap-4">
                     {socialLinks.map((social, index) => (
                       <motion.a
                         key={index}
@@ -196,59 +158,49 @@ export default function Contact() {
               </div>
             </motion.div>
 
-            {/* Contact Form */}
-            <motion.div variants={itemVariants} className="glass rounded-2xl p-6 border border-gray-200 dark:border-gray-700">
-              <h3 className="text-[1.1rem] md:text-[1.25rem] font-bold text-gray-900 dark:text-white mb-5">Send a Message</h3>
+            {/* Quick Message */}
+            <motion.div variants={itemVariants} className="glass rounded-2xl p-6 md:p-8 border border-gray-200 dark:border-gray-700">
+              <h3 className="text-[1.1rem] md:text-[1.25rem] font-bold text-gray-900 dark:text-white mb-5">Resume</h3>
               <div className="space-y-4">
-                {submitted ? (
-                  <div className="flex flex-col items-center justify-center py-8 md:py-12">
-                    <img src="https://cdn-icons-png.flaticon.com/512/5610/5610944.png" alt="Submitted" width={128} height={128} className="w-32 h-32 mb-4" />
-                    <p className="text-green-600 dark:text-green-400 font-semibold text-lg">Thank you! Your message has been sent.</p>
-                  </div>
-                ) : (
-                  <form className="space-y-5" onSubmit={handleSubmit}>
-                    <div>
-                      <label className="block text-gray-700 dark:text-gray-300 mb-1 font-medium">Name</label>
-                      <input
-                        type="text"
-                        name="name"
-                        value={form.name}
-                        onChange={handleChange}
-                        className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        required
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-gray-700 dark:text-gray-300 mb-1 font-medium">Contact (Email or Phone)</label>
-                      <input
-                        type="text"
-                        name="contact"
-                        value={form.contact}
-                        onChange={handleChange}
-                        className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        required
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-gray-700 dark:text-gray-300 mb-1 font-medium">Description</label>
-                      <textarea
-                        name="description"
-                        value={form.description}
-                        onChange={handleChange}
-                        className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        rows={4}
-                        required
-                      />
-                    </div>
-                    {error && <div className="text-red-500 text-sm">{error}</div>}
-                    <button
-                      type="submit"
-                      className="w-full px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg font-semibold text-[1rem] md:text-[1.1rem] hover:shadow-xl transition-all"
+                <div className="text-center py-8 md:py-12">
+                  <motion.div
+                    animate={{
+                      scale: [1, 1.1, 1],
+                      rotate: [0, 5, -5, 0],
+                    }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      ease: 'easeInOut',
+                    }}
+                  >
+                    <FaEnvelope className="text-3xl md:text-5xl text-blue-600 dark:text-blue-400 mx-auto mb-3" />
+                  </motion.div>
+                  <p className="text-gray-700 dark:text-gray-300 mb-5 text-[0.95rem] md:text-base">
+                    Download or view my latest resume below.
+                  </p>
+                  <div className="flex flex-col justify-center gap-4">
+                    <motion.a
+                      href="/asserts/resume.pdf"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-6 md:px-8 py-3 md:py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg font-semibold text-[1rem] md:text-[1.1rem] hover:shadow-xl transition-all text-center"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
                     >
-                      Send
-                    </button>
-                  </form>
-                )}
+                      View Resume
+                    </motion.a>
+                    <motion.a
+                      href="/asserts/resume.pdf"
+                      download
+                      className="px-6 md:px-8 py-3 md:py-4 bg-gradient-to-r from-green-500 to-blue-600 text-white rounded-lg font-semibold text-[1rem] md:text-[1.1rem] hover:shadow-xl transition-all text-center"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      Download Resume
+                    </motion.a>
+                  </div>
+                </div>
               </div>
             </motion.div>
           </div>

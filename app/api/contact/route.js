@@ -1,12 +1,11 @@
 
-import { db } from '@/lib/firebase';
-import { collection, addDoc } from 'firebase/firestore';
+import { db } from '@/lib/firebaseAdmin';
 
 export async function POST(request) {
   try {
     const { name, contact, description } = await request.json();
 
-    await addDoc(collection(db, 'contact'), {
+    await db.collection('contact').add({
       name,
       contact,
       description,
